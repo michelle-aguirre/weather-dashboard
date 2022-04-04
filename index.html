@@ -6,70 +6,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- links for bootstrap css and fonts -->
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <header>
+    <header class="hero container-fluid">
         <h1 class="text-center">Weather Dashboard</h1>
     </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <h2>Search for a City:</h2>
-                <div class="input-group mb-3">
-                    <form id="search"> 
-                    <input type="text" class="form-control" placeholder="City Name"
-                        aria-label="City Name" aria-describedby="button-addon2" id="city">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-                    <div id="cityName">City Name</div>
-                </form>
-                </div>
-            </div>
-            <div class="today_weather col-8 pt-3">
-                City Name
-                <h3 id="current-city" class="city-name"></h3>
-                <img id="city-img"/>
-                <div class="row"></div>
-                <p id="temp"> Temp:</p><span id="current-temp"></span>
-                <p id="humid">Humidity:</p><span id="current-humid"></span>
-                <p id="wind">Wind:</p><span id="current-wind"></span>
-                <p id="uv">UV Index:</p><span id="current-uv"></span>
-            
-            <div id="forecast-card">
-                <div class="future-forecast"></div>
-                <div class="d-flex flex-row justify-content-between"></div>
-                    <h4 class="future-head">5-Day Weather Forecast</h4>
-                </div>
-                <div class="row">
-                    <div class="column4">
-                        <div id="card-1" style="width: 18rem;"></div>
-                    
-                    <div class="column4">
-                        <div id="card-2" style="width: 18rem;"></div>
-                    
-                    <div class="column4">
-                        <div id="card-3" style="width: 18rem;"></div>
-                    
-                    <div class="column4">
-                        <div id="card-4" style="width: 18rem;"></div>
-                    
-                    <div class="column4">
-                        <div id="card-5" style="width: 18rem;"></div>
-        
-        </div>
-        </div>
-        </div>
-    </div>
+    <main class="container-fluid">
+        <div class="row flex-row justify-space-between">
+            <div class="container">
+                <div class="row" id="weatherDashboard">
+                    <div class="col-4">
+                        <h2>Search for a City:</h2>
+                        <div class="input-group mb-3">
+                            <form id="search">
+                                <input type="text" class="form-control" placeholder="City Name" aria-label="City Name"
+                                    aria-describedby="button-addon2" id="city">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    id="button-addon2">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="today_weather col-8 pt-3">
+                        City Name
+                        <!-- current day weather data -->
+                        <div id="current-day-info" class="border border-primary mb-3 p-3">
+                            <h3 id="current-day-city-date">City (Date) Weather Conditions </h3>
+                            <img class="current-day-icon"/>
+                            <p id="current-day-temp">Temp: </p>
+                            <p id="current-day-wind">Wind: </p>
+                            <p id="current-day-humidity">Humidity: </p>
+                            <p id="current-day-uv">UV Index: <span id="uvBtn"></span> </p>
+                        </div>
+
+                        <!-- Container to hold 5 day forecast cards -->
+                        <div class="container">
+                            <div id="five-day-row" class="flex-row">
+                                <div class="col">
+                                    <h4>5 day forecast</h4>
+                                </div>
+
+                                <div id="five-day-box" class="row">
+                                    <div id="daily-box" class="row">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-    <script src="assets/script.js"></script>
+                    <!-- Script tags for moment js, jquery, popper.min and bootstrap -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                        crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                        crossorigin="anonymous"></script>
+                    <script src="./assets/js/script.js"></script>
 </body>
+
 
 </html>
